@@ -23,15 +23,14 @@ abstract class AbstractKoma {
     image(img, SQUARESIZE*this.x+2, this.y*SQUARESIZE+2, SQUARESIZE-4, SQUARESIZE-4);
 
     if (this.kStat.selected) this.drawSelected();
-
   }
   
-  void drawSelected() {
+   void drawSelected() {
     fill(#FF0000, SQUARESIZE);
     rect(this.x*SQUARESIZE, this.y*SQUARESIZE, SQUARESIZE, SQUARESIZE);
   }
   
- void move(int toX, int toY) {
+  void move(int toX, int toY) {
     AbstractKoma koma = komaList.getKomaFromPlace(toX, toY);
     if (koma==null) this.updatePos(toX, toY);
     else if (koma.team != gs.turn) this.moveAndCapture(koma, toX, toY);
@@ -43,7 +42,7 @@ abstract class AbstractKoma {
     this.kStat.captured=false;
     gs.turn = (gs.turn+1)%2;
   }
-
+  
   void moveAndCapture(AbstractKoma enemy, int toX, int toY) {
     this.updatePos(toX, toY);
     if (enemy!=null) enemy.captured();
@@ -55,3 +54,4 @@ abstract class AbstractKoma {
     this.y = board.mArea[this.team].getBlankYIndex();
     this.x = board.mArea[this.team].posX;
   }
+}
